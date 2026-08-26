@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "proshop-database-management",
+  "compatibility_date": "2025-07-15",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "proshop-db",
+      "database_id": "bb91b2a1-4a4b-45fc-bca3-30ae08646b4b",
+      "migrations_dir": "database/migrations"
+    }
+  ]
+}

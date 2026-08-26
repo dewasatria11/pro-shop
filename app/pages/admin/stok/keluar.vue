@@ -1,0 +1,1 @@
+<script setup lang="ts">definePageMeta({layout:'admin'})</script><template><div class="admin-page"><AdminPageHeader title="Barang Keluar" description="Kurangi stok tanpa mengizinkan persediaan negatif."/><StockMovementForm type="out"/></div></template>

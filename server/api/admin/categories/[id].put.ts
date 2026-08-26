@@ -1,0 +1,2 @@
+import { categorySchema } from '../../../../shared/schemas';import { d1Execute } from '../../../utils/d1';import { parseBody } from '../../../utils/security'
+export default defineEventHandler(async event=>{const b=parseBody<any>(categorySchema,await readBody(event)),id=getRouterParam(event,'id');await d1Execute(event,"UPDATE categories SET name=?,slug=?,description=?,sort_order=?,is_active=?,updated_at=datetime('now') WHERE id=? AND deleted_at IS NULL",[b.name,b.slug,b.description,b.sortOrder,b.isActive?1:0,id]);return {data:{id}}})

@@ -1,0 +1,1 @@
+<script setup lang="ts">definePageMeta({layout:'admin'})</script><template><div class="admin-page"><AdminPageHeader title="Barang Masuk" description="Tambahkan stok dan simpan jejak mutasinya."/><StockMovementForm type="in"/></div></template>

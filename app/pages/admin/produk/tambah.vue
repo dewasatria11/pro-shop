@@ -1,0 +1,1 @@
+<script setup lang="ts">definePageMeta({layout:'admin'});function saved(id:string){navigateTo(`/admin/produk/${id}/edit`)}</script><template><div class="admin-page"><AdminPageHeader title="Tambah produk" description="Buat produk baru beserta stok awal dan fotonya."/><ProductForm @saved="saved"/></div></template>

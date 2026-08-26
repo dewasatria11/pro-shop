@@ -1,0 +1,2 @@
+import { categorySchema } from '../../../../shared/schemas';import { d1Execute } from '../../../utils/d1';import { parseBody } from '../../../utils/security'
+export default defineEventHandler(async event=>{const b=parseBody<any>(categorySchema,await readBody(event)),id=crypto.randomUUID();await d1Execute(event,'INSERT INTO categories (id,name,slug,description,sort_order,is_active) VALUES (?,?,?,?,?,?)',[id,b.name,b.slug,b.description,b.sortOrder,b.isActive?1:0]);return {data:{id}}})

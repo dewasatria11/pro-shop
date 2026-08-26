@@ -1,0 +1,2 @@
+import { z } from 'zod';import { d1Execute,hasD1 } from '../../utils/d1';import { parseBody } from '../../utils/security'
+export default defineEventHandler(async event=>{const body=parseBody<{productId?:string}>(z.object({productId:z.string().optional()}),await readBody(event));if(hasD1(event))await d1Execute(event,'INSERT INTO whatsapp_click_events (id,product_id) VALUES (?,?)',[crypto.randomUUID(),body.productId||null]);return {data:{tracked:true}}})

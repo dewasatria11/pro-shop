@@ -1,0 +1,1 @@
+import { d1Query } from '../../../utils/d1';export default defineEventHandler(async event=>({data:Object.fromEntries((await d1Query<{key:string;value:string}>(event,'SELECT key,value FROM settings')).map(x=>[x.key,x.value]))}))

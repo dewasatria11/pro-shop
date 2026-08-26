@@ -1,0 +1,5 @@
+import type { H3Event } from 'h3'
+import type { Product } from '../../app/types/product'
+import { d1Query } from './d1'
+export function mapProduct(r:any):Product{return {id:r.id,categoryId:r.category_id,sku:r.sku,name:r.name,slug:r.slug,shortDescription:r.short_description||'',description:r.description||'',price:r.price,stock:r.stock,lowStockThreshold:r.low_stock_threshold,specifications:JSON.parse(r.specifications_json||'{}'),isFeatured:Boolean(r.is_featured),isActive:Boolean(r.is_active),category:{id:r.category_id,name:r.category_name,slug:r.category_slug},coverImage:{url:r.image_url||'/product-placeholder.svg',alt:r.alt_text||r.name}}}
+export async function queryProducts(event:H3Event,where:string,params:unknown[],order:string,limit:number,offset:number){const sql=`SELECT p.*,c.name category_name,c.slug category_slug,i.image_url,i.alt_text FROM products p LEFT JOIN categories c ON c.id=p.category_id LEFT JOIN product_images i ON i.product_id=p.id AND i.is_cover=1 WHERE ${where} ORDER BY ${order} LIMIT ? OFFSET ?`;return (await d1Query<any>(event,sql,[...params,limit,offset])).map(mapProduct)}

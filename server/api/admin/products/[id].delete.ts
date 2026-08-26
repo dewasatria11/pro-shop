@@ -1,0 +1,2 @@
+import { d1Batch } from '../../../utils/d1'
+export default defineEventHandler(async event=>{const id=getRouterParam(event,'id')!,admin=(event.context as any).admin;await d1Batch(event,[{sql:"UPDATE products SET deleted_at=datetime('now'),is_active=0 WHERE id=?",params:[id]},{sql:'INSERT INTO audit_logs (id,admin_user_id,action,entity_type,entity_id) VALUES (?,?,?,?,?)',params:[crypto.randomUUID(),admin.id,'DELETE','product',id]}]);return {data:{success:true}}})

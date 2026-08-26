@@ -1,0 +1,2 @@
+import { d1Execute,d1First } from '../../../utils/d1'
+export default defineEventHandler(async event=>{const id=getRouterParam(event,'id'),used=await d1First<{count:number}>(event,'SELECT COUNT(*) count FROM products WHERE category_id=? AND deleted_at IS NULL',[id]);if((used?.count||0)>0)throw createError({statusCode:409,statusMessage:'Kategori masih digunakan produk. Nonaktifkan kategori sebagai gantinya.'});await d1Execute(event,"UPDATE categories SET deleted_at=datetime('now'),is_active=0 WHERE id=?",[id]);return {data:{success:true}}})
